@@ -24,3 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import 'cypress-axe';
+Cypress.Commands.add('loginToHerokuApp', (username, password) => {
+  cy.visit('https://the-internet.herokuapp.com/login');
+  cy.get('input[name="username"]').should('be.visible').type(username);
+  cy.get('input[name="password"]').should('be.visible').type(password);
+  cy.get('button[type="submit"]').should('not.be.disabled').click();
+});
